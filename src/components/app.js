@@ -4,9 +4,9 @@ export default class App extends Component {
   render() {
     return (
       <div className="grid">
-        <div className="grid__skew-light-one"></div>
-        <div className="grid__skew-light-two"></div>
-        <div className="grid__skew-light-box"></div>
+        <div className="grid__skew-dark-box" />
+        <div className="grid__skew-dark" />
+        <div className="grid__skew-light" />
       </div>
     );
   }
