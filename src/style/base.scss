@@ -3,6 +3,7 @@ $mg-index: 0;
 $fg-index: 1;
 $lightBlue: #5496E6;
 $darkBlue: #518BDE;
+$almostBlack: #303030;
 
 .grid {
     height: 100vh;
@@ -16,9 +17,9 @@ $darkBlue: #518BDE;
     &__title {
         z-index: $mg-index;
 
-        font-size: 18px;
         color: white;
-        font-family: 'Montserrat';
+        font-size: 18px;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 300;
         line-height: 22px;
 

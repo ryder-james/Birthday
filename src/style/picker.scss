@@ -1,6 +1,25 @@
 .picker {
-    background-color: crimson;
+    z-index: $fg-index;
+
+    padding-bottom: 50px;
 
     grid-column: 5/10;
     grid-row: 2/4;
+}
+
+input {
+    background-color: transparent;
+
+    color: $almostBlack;
+    font-size: 83px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+    text-align: center;
+
+    border: none;
+    border-bottom: 2px solid #E3B924;
+
+    &:focus {
+        outline: none;
+    }
 }
