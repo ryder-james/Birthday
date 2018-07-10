@@ -1,0 +1,14 @@
+.clock {
+    z-index: $fg-index;
+
+    background-color: $almostBlack;
+
+    height: 80%;
+
+    grid-row: 3;
+    grid-column: 2/11;
+    align-self: end;
+
+    -webkit-clip-path: polygon(7% 0, 100% 0, 93% 100%, 0% 100%);
+    clip-path: polygon(7% 0, 100% 0, 93% 100%, 0% 100%);
+}
