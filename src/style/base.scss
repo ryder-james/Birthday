@@ -1,7 +1,7 @@
 $bg-index: -1;
 $mg-index: 0;
 $fg-index: 1;
-$lightBlue: #5496E6;
+$lightBlue: #609EE9;
 $darkBlue: #518BDE;
 $almostBlack: #303030;
 
@@ -23,10 +23,10 @@ $almostBlack: #303030;
         font-weight: 300;
         line-height: 22px;
 
+        margin: 55px 75px;
+
         grid-row: 1;
         grid-column: 1/4;
-
-        margin: 55px 75px;
         justify-self: center;
     }
 }
