@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Button = (title, callback) => {
+const Button = (title, className, callback) => {
     return (
-        <button className="button" onClick={callback}>
+        <button className={className} onClick={callback}>
+            <i class="fas fa-calendar-alt"></i>
             {title}
         </button>
     );

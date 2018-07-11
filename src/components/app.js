@@ -16,10 +16,10 @@ export default class App extends Component {
     if(this.state.clockActive) {
       return [
         <Clock/>,
-        Button("Change Date", () => this.setState({clockActive: false}))
+        Button("Change Date", "change-date", () => {this.setState({ clockActive: false })})
       ]
     } else {
-      return Button("Generate Countdown", () => this.setState({clockActive: true}));
+      return Button("Generate Countdown", "button", () => this.setState({clockActive: true}));
     }
   }.bind(this)
 
