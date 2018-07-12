@@ -7,21 +7,21 @@
     grid-row: 2/3;
     justify-self: center;
     align-self: end;
-}
 
-.test {
-    background-color: transparent;
-
-    color: $almostBlack;
-    font-size: 83px;
-    font-family: $font-main;
-    font-weight: bold;
-    text-align: center;
-
-    border: none;
-    border-bottom: 1px solid $yellow;
-
-    &:focus {
-        outline: none;
+    &__input {
+        background-color: transparent;
+    
+        color: $almostBlack;
+        font-size: 83px;
+        font-family: $font-main;
+        font-weight: bold;
+        text-align: center;
+    
+        border: none;
+        border-bottom: 1px solid $yellow;
+    
+        &:focus {
+            outline: none;
+        }
     }
 }
