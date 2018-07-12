@@ -18,7 +18,8 @@ export default class App extends Component {
         hours: 0,
         minutes: 0,
         seconds: 0
-      }
+      },
+      age: 0
     }
   }
 
@@ -29,22 +30,30 @@ export default class App extends Component {
   }.bind(this)
 
   handleGenerate = function() {
-    this.setState({clockActive: true})
-
     const bday = this.state.startDate.toDate();
     const today = new Date();
-    const currentMonth = today.getMonth();
+    const cMonth = today.getMonth();
     const bMonth = bday.getMonth();
 
-    if (bMonth > currentMonth) {
+    const timeBetween = today.getTime() - bday.getTime();
+    const daysOld = Math.floor(timeBetween / (1000 * 60 * 60 * 24));
+    const yearsOld = Number((daysOld/365).toFixed(0));
+    this.setState({
+      age: yearsOld,
+      clockActive: true
+    });
+    
+    if (bMonth > cMonth) {
       bday.setFullYear(today.getFullYear());
-    } else if (bMonth < currentMonth) {
+    } else if (bMonth < cMonth) {
       bday.setFullYear(today.getFullYear() + 1);
-    } else if (bMonth == currentMonth) {
+      this.setState({ age: yearsOld + 1 });
+    } else if (bMonth == cMonth) {
       if (bday.getDate() > today.getDate()) {
         bday.setFullYear(today.getFullYear());
       } else if (bday.getDate() <= today.getDate()) {
         bday.setFullYear(today.getFullYear() + 1);
+        this.setState({ age: yearsOld + 1 });
       }
     }
 
@@ -76,33 +85,43 @@ export default class App extends Component {
     }.bind(this), 1000);
   }.bind(this)
 
+  getBirthDate = function(date) {
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    if (month < 10) {
+      return `0${month}/${day}`
+    } else {
+      return `${month}/${day}`
+    }
+  }.bind(this)
+
   renderItems = function() {
     if(this.state.clockActive) {
       return [
-        <Clock timeRemaining={ this.state.timeRemaining }/>,
-        Button("Change Date", "change-date", 
+        <Clock key={0} timeRemaining={ this.state.timeRemaining }/>,
+        Button("Change Date", "change-date", 1, 
         () => {
           this.setState({ clockActive: false });
           clearInterval(this.timer);
         }),
-        LargeText("04/18"),
-        <label className="grid__remaining">remaining until your 28th birthday</label>
+        LargeText(this.getBirthDate(this.state.startDate.toDate(), 2)),
+        <label key={3} className="grid__remaining">remaining until you turn {this.state.age}</label>
       ]
     } else {
       return [
-        Button("Generate Countdown", "button", () => this.handleGenerate()),
-        <Picker startDate={this.state.startDate} callback={(date) => this.handleChange(date)}/>
+        Button("Generate Countdown", "button", 0, () => this.handleGenerate()),
+        <Picker key={1} startDate={this.state.startDate} callback={(date) => this.handleChange(date)}/>
       ]
     }
   }.bind(this)
 
   render() {
     return (
-      <div className="grid">
-        <h1 className="grid__title">Birthday Countdown</h1>
+      <div key={-4} className="grid">
+        <h1 key={-3} className="grid__title">Birthday Countdown</h1>
         
-        <div className="grid__skew-dark"/>
-        <div className="grid__skew-light"/>
+        <div key={-2} className="grid__skew-dark"/>
+        <div key={-1} className="grid__skew-light"/>
 
         { this.renderItems() }
       </div>
