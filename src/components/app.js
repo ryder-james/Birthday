@@ -31,7 +31,24 @@ export default class App extends Component {
   handleGenerate = function() {
     this.setState({clockActive: true})
 
-    const countDownDate = this.state.startDate.toDate().getTime();
+    const bday = this.state.startDate.toDate();
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const bMonth = bday.getMonth();
+
+    if (bMonth > currentMonth) {
+      bday.setFullYear(today.getFullYear());
+    } else if (bMonth < currentMonth) {
+      bday.setFullYear(today.getFullYear() + 1);
+    } else if (bMonth == currentMonth) {
+      if (bday.getDate() > today.getDate()) {
+        bday.setFullYear(today.getFullYear());
+      } else if (bday.getDate() <= today.getDate()) {
+        bday.setFullYear(today.getFullYear() + 1);
+      }
+    }
+
+    const countDownDate = bday.getTime();
 
     this.timer = setInterval(function() {
       const now = new Date().getTime();
