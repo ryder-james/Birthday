@@ -17,7 +17,7 @@ $font-main: 'Roboto Condensed', sans-serif;
 
     display: grid;
     grid-template-rows: repeat(4, minmax(200px, 1fr));
-    grid-template-columns: repeat(11, minmax(150px, 1fr));
+    grid-template-columns: repeat(10, minmax(150px, 1fr));
     grid-gap: 0px;
 
     &__title {

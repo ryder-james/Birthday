@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import moment from 'moment';
+
 import Picker from './picker';
 import Button from './button';
 import Clock from './clock';
@@ -9,15 +11,23 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      clockActive: false
+      clockActive: false,
+      startDate: moment()
     }
   }
+
+  handleChange = function(date) {
+    console.log("App.js handleChange");
+    this.setState({
+        startDate: date
+    });
+  }.bind(this)
 
   handleGenerate = function() {
     this.setState({clockActive: true})
 
     // Set the date we're counting down to
-    const countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
+    const countDownDate = this.state.startDate.toDate().getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function() {
@@ -57,7 +67,7 @@ export default class App extends Component {
     } else {
       return [
         Button("Generate Countdown", "button", () => this.handleGenerate()),
-        <Picker/>
+        <Picker callback={(date) => this.handleChange(date)}/>
       ]
     }
   }.bind(this)
