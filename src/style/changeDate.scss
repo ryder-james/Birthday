@@ -3,7 +3,7 @@
 
     color: white;
     font-size: 24px;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: $font-main;
     font-weight: 100;
     line-height: 19px;
     text-align: center;
@@ -15,6 +15,10 @@
     grid-row: 2/3;
     grid-column: 4/5;
     justify-self: start;
+
+    &:focus {
+        outline: none;
+    }
 
     .fas {
         margin-right: 10px;

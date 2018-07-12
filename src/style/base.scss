@@ -1,10 +1,15 @@
 $bg-index: -1;
 $mg-index: 0;
 $fg-index: 1;
+
 $lightBlue: #609EE9;
 $darkBlue: #518BDE;
 $almostBlack: #303030;
+$lightGray: #E6E6E6;
 $yellow: #F7D754;
+
+$font-title: 'Montserrat', sans-serif;
+$font-main: 'Roboto Condensed', sans-serif;
 
 .grid {
     height: 100vh;
@@ -20,7 +25,7 @@ $yellow: #F7D754;
 
         color: white;
         font-size: 18px;
-        font-family: 'Montserrat', sans-serif;
+        font-family: $font-title;
         font-weight: 300;
         line-height: 22px;
 
@@ -29,5 +34,22 @@ $yellow: #F7D754;
         grid-row: 1;
         grid-column: 1/4;
         justify-self: center;
+    }
+
+    &__remaining {
+        color: $almostBlack;
+        font-family: $font-title;
+        font-size: 22px;
+        font-weight: 300;
+        text-align: center;
+
+        margin-top: 33px;
+
+        grid-column: 1/-1;
+        grid-row: 4/-1;
+    }
+
+    button:hover {
+        cursor: pointer;
     }
 }
