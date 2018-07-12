@@ -12,12 +12,17 @@ export default class App extends Component {
 
     this.state = {
       clockActive: false,
-      startDate: moment()
+      startDate: moment(),
+      timeRemaining: {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+      }
     }
   }
 
   handleChange = function(date) {
-    console.log("App.js handleChange");
     this.setState({
         startDate: date
     });
@@ -26,48 +31,50 @@ export default class App extends Component {
   handleGenerate = function() {
     this.setState({clockActive: true})
 
-    // Set the date we're counting down to
     const countDownDate = this.state.startDate.toDate().getTime();
 
-    // Update the count down every 1 second
-    const x = setInterval(function() {
-
-      // Get todays date and time
+    this.timer = setInterval(function() {
       const now = new Date().getTime();
 
-      // Find the distance between now an the count down date
       const distance = countDownDate - now;
 
-      // Time calculations for days, hours, minutes and seconds
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // Display the result in the element with id="demo"
-      const time = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-      console.log(time);
+      this.setState({
+        timeRemaining: {
+          days,
+          hours,
+          minutes,
+          seconds
+        }
+      });
 
-      // If the count down is finished, write some text 
       if (distance < 0) {
-        clearInterval(x);
+        clearInterval(this.timer);
         console.log("Expired");
       }
-    }, 1000);
+    }.bind(this), 1000);
   }.bind(this)
 
   renderItems = function() {
     if(this.state.clockActive) {
       return [
-        <Clock/>,
-        Button("Change Date", "change-date", () => this.setState({ clockActive: false })),
+        <Clock timeRemaining={ this.state.timeRemaining }/>,
+        Button("Change Date", "change-date", 
+        () => {
+          this.setState({ clockActive: false });
+          clearInterval(this.timer);
+        }),
         LargeText("04/18"),
         <label className="grid__remaining">remaining until your 28th birthday</label>
       ]
     } else {
       return [
         Button("Generate Countdown", "button", () => this.handleGenerate()),
-        <Picker callback={(date) => this.handleChange(date)}/>
+        <Picker startDate={this.state.startDate} callback={(date) => this.handleChange(date)}/>
       ]
     }
   }.bind(this)
@@ -77,8 +84,8 @@ export default class App extends Component {
       <div className="grid">
         <h1 className="grid__title">Birthday Countdown</h1>
         
-        <div className="grid__skew-dark"></div>
-        <div className="grid__skew-light" />
+        <div className="grid__skew-dark"/>
+        <div className="grid__skew-light"/>
 
         { this.renderItems() }
       </div>
